@@ -1,0 +1,81 @@
+.invoice-form {
+  max-width: 95vw;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.invoice-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice-form label {
+  margin-bottom: 5px;
+}
+
+.invoice-form input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.invoice-form button {
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.invoice-form button:hover {
+  background-color: #0056b3;
+}
+
+/* form custom css */
+.form-one-section {
+  display: flex;
+  margin: 1% 1% 5% 1%;
+  justify-content: space-between;
+}
+.div-flex-row {
+  /* display: flex; */
+  /* border: 1px solid; */
+  /* margin: 5px; */
+}
+.input-box-border{
+  border: none;
+    /* border-bottom: 1px solid #80808061; */
+    border-radius: 0px;
+}
+.flex-osk{
+  display: flex;
+}
+.border-one-solid{
+  /* border: 1px solid; */
+}
+
+.diplay_none{
+  display: none;
+}
+.textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 11px 0px 0px 11px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  resize:none;
+}
