@@ -12,7 +12,11 @@
 export default {
   build: {
     rollupOptions: {
-      external: ['jspdf'],
+      external: ['jspdf', 'jspdf-autotable'], // Specify the external module(s) here
     },
   },
+  plugins: [
+    react(),
+    // Other plugins you're using (e.g., @vitejs/plugin-react)
+  ],
 };
