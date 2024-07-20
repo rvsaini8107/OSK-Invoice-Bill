@@ -79,66 +79,7 @@ const InvoiceBillPc = () => {
     });
   }, [tableRows, formData.cgstRate, formData.sgstRate]);
 
-  // const handleDownload = () => {
-  //   const doc = new jsPDF();
-
-  //   // Add title
-  //   doc.setFontSize(18);
-  //   doc.text("Invoice", 105, 10, null, null, "center");
-
-  //   // Add Supplier Information
-  //   doc.setFontSize(12);
-  //   doc.text(`OM SHREE KARNI MARBLES GRANITES`, 10, 20);
-  //   doc.text(`${formData.plotNumber}`, 10, 30);
-  //   doc.text(`${formData.location}`, 10, 40);
-  //   doc.text(`Phone no. : 6302608064`, 10, 50);
-  //   doc.text(`Email : oskgranite008@gmail.com`, 10, 60);
-  //   doc.text(`GSTIN: ${formData.gstin}`, 10, 70);
-  //   doc.text(`State: 36-Telangana`, 10, 80);
-  //   doc.text(`Invoice No: ${formData.invoiceNo}`, 10, 90);
-  //   doc.text(`Dated: ${formData.invoiceDate}`, 10, 100);
-
-  //   // Add Buyer Information
-  //   doc.text(`Buyer: ${formData.buyerName}`, 10, 110);
-  //   doc.text(`Buyer Address: ${formData.buyerAddress}`, 10, 120);
-  //   doc.text(`Buyer's Order No: ${formData.buyerOrderNo}`, 10, 130);
-  //   doc.text(`Dated: ${formData.buyerOrderDate}`, 10, 140);
-
-  //   // Add Item Details using autoTable plugin
-  //   const tableData = tableRows.map(row => [
-  //     row.description,
-  //     row.hsn,
-  //     `${row.gstRate}%`,
-  //     row.quantity,
-  //     row.rate,
-  //     row.amount,
-  //   ]);
-
-  //   doc.autoTable({
-  //     startY: 160,
-  //     head: [
-  //       ["Description of Goods", "HSN/SAC", "GST Rate", "Quantity", "Rate", "Amount"],
-  //     ],
-  //     body: tableData,
-  //     theme: "striped",
-  //   });
-
-  //   // Add Totals and Taxes
-  //   doc.text(`Total Amount: ${totals.totalAmount}`, 10, doc.autoTable.previous.finalY + 10);
-  //   doc.text(`CGST: ${totals.cgst}`, 10, doc.autoTable.previous.finalY + 20);
-  //   doc.text(`SGST: ${totals.sgst}`, 10, doc.autoTable.previous.finalY + 30);
-  //   doc.text(`Grand Total: ${totals.grandTotal}`, 10, doc.autoTable.previous.finalY + 40);
-  //   doc.text(`Amount Chargeable: ${formData.amountChargeable}`, 10, doc.autoTable.previous.finalY + 50);
-  //   doc.text(`Tax Amount: ${formData.taxAmount}`, 10, doc.autoTable.previous.finalY + 60);
-
-  //   // Add Footer
-  //   doc.text(`Company's PAN: ${formData.companyPan}`, 10, doc.autoTable.previous.finalY + 70);
-  //   doc.text("Declaration", 10, doc.autoTable.previous.finalY + 80);
-  //   doc.text("We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.", 10, doc.autoTable.previous.finalY + 90);
-
-  //   // Save PDF
-  //   doc.save("invoice.pdf");
-  // };
+  
   const handleDownload = () => {
     const doc = new jsPDF();
     
