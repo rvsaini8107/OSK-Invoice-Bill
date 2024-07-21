@@ -1,8 +1,10 @@
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import convertToWords from './convertToWords.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+import convertToWords from './convertToWords.js';
+
 
 const handleDownload = (formData, tableRows, totals, isInState) => {
   const documentDefinition = {
