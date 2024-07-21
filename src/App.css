@@ -135,3 +135,26 @@ img.logomaakarni {
   }
   
 }
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: large;
+}
+.form-one-section {
+  display: block;
+  margin: 1% 1% 0% 1%;
+}
+thead {
+  font-size: small;
+}
+table{
+  overflow-y:scroll;
+  height:100px;
+  display:block;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    padding: 0px 7%;
+    flex-direction: column;
+}
+}
