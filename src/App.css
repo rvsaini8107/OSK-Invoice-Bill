@@ -47,7 +47,7 @@
 /* form custom css */
 .form-one-section {
   display: flex;
-  margin: 1% 1% 5% 1%;
+  margin: 1% 1% 0% 1%;
   justify-content: space-between;
 }
 .div-flex-row {
@@ -78,4 +78,60 @@
   box-sizing: border-box;
   margin-top: 6px;
   resize:none;
+}
+button.toggle-button {
+  border-radius: 0;
+  background-color: gray;
+}
+.table-coverbox {
+  display: flex;
+  justify-content: center;
+}
+button.remove-button {
+  background: red;
+  margin-top: -10px;
+  border-radius: 2px;
+  margin-left: 22%;
+}
+.addbtn {
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+.row {
+  display: flex;
+  justify-content: normal;
+  padding: 0px 7%;
+}
+button.printbtn {
+    padding: 2% 42%;
+    font-size: x-large;
+    background: green;
+}
+img.logomaakarni {
+  width: 100%;
+  animation: maakarni 4s infinite linear;
+  
+}
+.form-one-section-center {
+  width: 20%;
+ 
+}
+@keyframes maakarni {
+  0% {
+    filter: drop-shadow(3px 3px 10px red);
+  }
+  25% {
+    filter: drop-shadow(3px 3px 10px green);
+  }
+  50% {
+    filter: drop-shadow(3px 3px 10px yellow);
+  }
+  75% {
+    filter: drop-shadow(3px 3px 10px blue);
+  }
+  100% {
+    filter: drop-shadow(3px 3px 10px rgb(29, 210, 223));
+  }
+  
 }
