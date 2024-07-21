@@ -1,31 +1,14 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
 import maakarni from "./../assets/makarni.png"
+// import handleDownload from "./JsPDF.js"
+import handleDownload from "./pdfMake.js"
+
+import fromDataObject from "./fromDataObject.js"
 
 const InvoiceBillPc = () => {
   const [isInState, setIsInState] = useState(true);
-  const [formData, setFormData] = useState({
-    plotNumber: "PLOT NO 2,3,36 and 37",
-    location: "MOINABAD MANDAL 500075,Hyderabad,Telangana",
-    gstin: "36AAHFO0962G1Z9",
-    invoiceNo: "",
-    invoiceDate: new Date().toISOString().split("T")[0], // Set to today's date
-    lorryNo: "",
-    paymentTerms: "7 Days",
-    supplierRef: "",
-    otherRef: "Verbally",
-    buyerName: "",
-    buyerAddress: "",
-    buyerOrderNo: "",
-    buyerOrderDate: "",
-    deliveryTerms: "Verbal",
-    cgstRate: 9,
-    sgstRate: 9,
-    amountChargeable: "",
-    taxAmount: "",
-    companyPan: "AAHFO0962G",
-  });
+  const [formData, setFormData] = useState(fromDataObject);
 
   const [tableRows, setTableRows] = useState([
     { item: "Granite", hsn: "6802", gstRate: 18, quantity: 0, rate: 0, amount: 0 },
@@ -101,176 +84,8 @@ const InvoiceBillPc = () => {
     });
   }, [tableRows, formData.cgstRate, formData.sgstRate, isInState]);
 
-  const handleDownload = () => {
-    if (formData.buyerName === "") {return}
-    
-    const doc = new jsPDF();
+  
 
-    // Add header
-
-    doc.setFontSize(20);
-    doc.setFont("helvetica", "bold");
-    doc.text(
-      "OM SHREE KARNI MARBLES & GRANITES",
-      105,
-      17,
-      null,
-      null,
-      "center"
-    );
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.text(
-      "DIAMOND COLONY, HIMAYATHNAGAR VILLAGE AND GRAM PM MOINABAD MANDAL",
-      105,
-      25,
-      null,
-      null,
-      "center"
-    );
-    doc.text("State: 36-Telangana", 105, 30, null, null, "center");
-    doc.text("Phone no. : 6302608064", 105, 35, null, null, "center");
-    doc.text("Email : oskgranite008@gmail.com", 105, 40, null, null, "center");
-    doc.text(`GSTIN: ${formData.gstin}`, 105, 45, null, null, "center");
-
-    // Add Buyer Information
-    doc.setFontSize(14);
-    doc.text("Tax Invoice", 10, 60);
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "bold");
-    doc.text(`Bill To: ${formData.buyerName}`, 10, 70);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.text(`Address: ${formData.buyerAddress}`, 10, 80);
-    doc.setFontSize(12);
-    doc.text(`Invoice No: ${formData.invoiceNo}`, 195, 67, null, null, "right");
-    doc.text(`Dated: ${formData.invoiceDate}`, 195, 75, null, null, "right");
-
-    // Add Item Details using autoTable plugin
-    const tableData = tableRows.map((row, index) => [
-      index + 1,
-      row.item,
-      row.hsn,
-      row.rate,
-      row.quantity,
-      row.amount,
-      `${row.gstRate}%`,
-    ]);
-
-    doc.autoTable({
-      startY: 110,
-      head: [["#", "ITEM", "HSN/SAC", "Price/Unit", "QTY", "AMOUNT", "GST"]],
-      body: tableData,
-      theme: "striped",
-    });
-
-    // // Add Totals and Taxes
-
-    const yPosition = doc.autoTable.previous.finalY;
-    // Add invoice details
-    doc.text(`Total Amount: ${totals.totalAmount}`, 11, yPosition + 20);
-    if (isInState) {
-      doc.text(`CGST: ${totals.cgst}`, 11, yPosition + 30);
-      doc.text(`SGST: ${totals.sgst}`, 11, yPosition + 40);
-    } else {
-      doc.text(`IGST: ${totals.igst}`, 11, yPosition + 30);
-    }
-    doc.text(
-      `Grand Total: ${totals.grandTotal.toFixed(2)}`,
-      11,
-      yPosition + 50
-    );
-
-    // Additional sections for Invoice Amount in Words and Terms
-    doc.setFontSize(11);
-    doc.text(
-      "Invoice Amount in Words: " +
-        convertToWords(totals.grandTotal.toFixed(0)),
-      10,
-      yPosition + 60
-    );
-    doc.text("Terms and Conditions", 10, yPosition + 70);
-    doc.text("Thanks for doing business with us!", 10, yPosition + 80);
-
-    // Save PDF
-    doc.save("invoice.pdf");
-  };
-  const convertToWords = (num) => {
-    if (num === 0) return "Zero";
-
-    const belowTen = [
-      "",
-      "One",
-      "Two",
-      "Three",
-      "Four",
-      "Five",
-      "Six",
-      "Seven",
-      "Eight",
-      "Nine",
-    ];
-    const belowTwenty = [
-      "Ten",
-      "Eleven",
-      "Twelve",
-      "Thirteen",
-      "Fourteen",
-      "Fifteen",
-      "Sixteen",
-      "Seventeen",
-      "Eighteen",
-      "Nineteen",
-    ];
-    const belowHundred = [
-      "",
-      "",
-      "Twenty",
-      "Thirty",
-      "Forty",
-      "Fifty",
-      "Sixty",
-      "Seventy",
-      "Eighty",
-      "Ninety",
-    ];
-    const aboveHundred = ["", "Thousand", "Million"];
-
-    const words = [];
-
-    const helper = (n) => {
-      if (n < 10) return belowTen[n];
-      if (n < 20) return belowTwenty[n - 10];
-      if (n < 100)
-        return (
-          belowHundred[Math.floor(n / 10)] +
-          (n % 10 ? " " + belowTen[n % 10] : "")
-        );
-      if (n < 1000)
-        return (
-          belowTen[Math.floor(n / 100)] +
-          " Hundred" +
-          (n % 100 ? " " + helper(n % 100) : "")
-        );
-    };
-
-    let thousandCounter = 0;
-    while (num > 0) {
-      const chunk = num % 1000;
-      if (chunk) {
-        words.unshift(
-          helper(chunk) +
-            (aboveHundred[thousandCounter]
-              ? " " + aboveHundred[thousandCounter]
-              : "")
-        );
-      }
-      num = Math.floor(num / 1000);
-      thousandCounter++;
-    }
-
-    return words.join(" ").trim();
-  };
 
   // Example usage
   // console.log(convertToWords()); // "Twelve Thousand Three Hundred Forty Five"
@@ -303,7 +118,7 @@ const InvoiceBillPc = () => {
                 ></textarea>
               </div>
             </div>
-            <div class="form-one-section-center">
+            <div className="form-one-section-center">
               <img src={maakarni} alt="Jai Maa Karni" className="logomaakarni" />
             </div>
             <div className="form-one-section-right">
@@ -498,7 +313,7 @@ const InvoiceBillPc = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <button type="button" className="printbtn" onClick={handleDownload}>
+            <button type="button" className="printbtn" onClick={()=>handleDownload(formData,tableRows,totals,isInState)}>
             Print
           </button>
           </div>
