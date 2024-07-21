@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "jspdf-autotable";
+// import "jspdf-autotable";
 import maakarni from "./../assets/makarni.png"
 // import handleDownload from "./JsPDF.js"
 import handleDownload from "./pdfMake.js"
