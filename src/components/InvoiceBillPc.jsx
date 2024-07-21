@@ -4,7 +4,7 @@ import maakarni from "./../assets/makarni.png"
 // import handleDownload from "./JsPDF.js"
 import handleDownload from "./pdfMake.js"
 
-import fromDataObject from "./fromDataObject.js"
+import fromDataObject from "./fromDataObject.js" 
 
 const InvoiceBillPc = () => {
   const [isInState, setIsInState] = useState(true);
